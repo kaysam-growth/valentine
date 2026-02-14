@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💘 A Very Suspicious Valentine 💘</title>
+<link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Fredoka+One&family=Baloo+2:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --hot-pink: #FF2D78;
+    --electric-yellow: #FFE600;
+    --wild-orange: #FF6B35;
+    --neon-green: #39FF14;
+    --sky-blue: #00C8FF;
+    --deep-red: #C0003C;
+    --cream: #FFF8E7;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--hot-pink);
+    font-family: 'Baloo 2', cursive;
+    overflow-x: hidden;
+    cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><text y='28' font-size='28'>❤️</text></svg>"), auto;
+  }
+
+  /* Animated background stripes */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.08) 40px,
+      rgba(255,255,255,0.08) 80px
+    );
+    animation: stripeMove 4s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes stripeMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 113px 113px; }
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+  /* Floating hearts */
+  .heart-rain {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .falling-heart {
+    position: absolute;
+    top: -50px;
+    font-size: 1.5rem;
+    animation: fall linear infinite;
+    opacity: 0.6;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* HEADER */
+  .main-header {
+    margin: 30px 0 10px;
+  }
+
+  .header-label {
+    display: inline-block;
+    background: var(--electric-yellow);
+    color: #1a1a1a;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.95rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 50px;
+    border: 3px solid #1a1a1a;
+    box-shadow: 3px 3px 0 #1a1a1a;
+    margin-bottom: 20px;
+    animation: wiggle 2s ease-in-out infinite;
+  }
+
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+  }
+
+  .main-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(3rem, 10vw, 6.5rem);
+    color: var(--cream);
+    text-shadow:
+      5px 5px 0 #1a1a1a,
+      -2px -2px 0 #1a1a1a,
+      2px -2px 0 #1a1a1a,
+      -2px 2px 0 #1a1a1a;
+    line-height: 1;
+    animation: titleBounce 1s ease-out forwards;
+  }
+
+  @keyframes titleBounce {
+    0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+    60% { transform: scale(1.1) rotate(3deg); }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+
+  .title-sub {
+    font-family: 'Boogaloo', cursive;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    color: var(--electric-yellow);
+    text-shadow: 2px 2px 0 #1a1a1a;
+    margin-top: 8px;
+    animation: fadeSlideUp 0.8s 0.4s ease-out both;
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* CARD */
+  .card {
+    background: var(--cream);
+    border: 4px solid #1a1a1a;
+    border-radius: 20px;
+    box-shadow: 8px 8px 0 #1a1a1a;
+    padding: 30px 28px;
+    margin: 30px 0;
+    animation: fadeSlideUp 0.8s 0.6s ease-out both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '💕';
+    position: absolute;
+    font-size: 5rem;
+    opacity: 0.06;
+    top: -10px; right: -10px;
+    transform: rotate(15deg);
+  }
+
+  .card-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.8rem;
+    color: var(--hot-pink);
+    margin-bottom: 12px;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+  }
+
+  .card-body {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.7;
+    font-weight: 600;
+  }
+
+  .card-body span.highlight {
+    color: var(--hot-pink);
+    font-weight: 900;
+  }
+
+  .card-body span.green {
+    color: #1a8a00;
+    font-weight: 900;
+  }
+
+  /* ROAST SECTION */
+  .roast-section {
+    background: var(--electric-yellow);
+    border: 4px solid #1a1a1a;
+    border-radius: 20px;
+    box-shadow: 8px 8px 0 #1a1a1a;
+    padding: 28px;
+    margin: 25px 0;
+    animation: fadeSlideUp 0.8s 0.8s ease-out both;
+  }
+
+  .roast-section h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.9rem;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+  }
+
+  .roast-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .roast-item {
+    background: white;
+    border: 3px solid #1a1a1a;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: default;
+    box-shadow: 3px 3px 0 #1a1a1a;
+  }
+
+  .roast-item:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #1a1a1a;
+  }
+
+  .roast-item .emoji {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    line-height: 1.3;
+  }
+
+  /* QUIZ SECTION */
+  .quiz-section {
+    background: var(--sky-blue);
+    border: 4px solid #1a1a1a;
+    border-radius: 20px;
+    box-shadow: 8px 8px 0 #1a1a1a;
+    padding: 28px;
+    margin: 25px 0;
+    animation: fadeSlideUp 0.8s 1s ease-out both;
+  }
+
+  .quiz-section h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.9rem;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+  }
+
+  .quiz-subtitle {
+    font-size: 0.95rem;
+    color: #1a1a1a;
+    margin-bottom: 18px;
+    font-weight: 600;
+    opacity: 0.75;
+  }
+
+  .quiz-question {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+    min-height: 60px;
+  }
+
+  .quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .quiz-btn {
+    background: white;
+    border: 3px solid #1a1a1a;
+    border-radius: 12px;
+    padding: 12px 10px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
+    box-shadow: 3px 3px 0 #1a1a1a;
+    color: #1a1a1a;
+  }
+
+  .quiz-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #1a1a1a;
+    background: var(--electric-yellow);
+  }
+
+  .quiz-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 #1a1a1a;
+  }
+
+  .quiz-result {
+    margin-top: 16px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    background: white;
+    border: 3px solid #1a1a1a;
+    border-radius: 12px;
+    padding: 12px;
+    display: none;
+    box-shadow: 3px 3px 0 #1a1a1a;
+  }
+
+  /* CONFESSION SECTION */
+  .confession-section {
+    background: var(--wild-orange);
+    border: 4px solid #1a1a1a;
+    border-radius: 20px;
+    box-shadow: 8px 8px 0 #1a1a1a;
+    padding: 28px;
+    margin: 25px 0;
+    animation: fadeSlideUp 0.8s 1.2s ease-out both;
+  }
+
+  .confession-section h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.9rem;
+    color: var(--cream);
+    text-shadow: 2px 2px 0 #1a1a1a;
+    margin-bottom: 16px;
+  }
+
+  .confess-display {
+    background: var(--cream);
+    border: 3px solid #1a1a1a;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+    box-shadow: 4px 4px 0 #1a1a1a;
+    line-height: 1.5;
+  }
+
+  .confess-display:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 #1a1a1a;
+  }
+
+  .confess-btn {
+    background: var(--cream);
+    border: 3px solid #1a1a1a;
+    border-radius: 12px;
+    padding: 12px 26px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+    box-shadow: 4px 4px 0 #1a1a1a;
+    color: #1a1a1a;
+    width: 100%;
+  }
+
+  .confess-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 #1a1a1a;
+    background: var(--electric-yellow);
+  }
+
+  /* FINAL WISH */
+  .final-wish {
+    background: var(--deep-red);
+    border: 4px solid #1a1a1a;
+    border-radius: 20px;
+    box-shadow: 8px 8px 0 #1a1a1a;
+    padding: 36px 28px;
+    margin: 25px 0;
+    animation: fadeSlideUp 0.8s 1.4s ease-out both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .final-wish h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2rem, 6vw, 3rem);
+    color: var(--electric-yellow);
+    text-shadow: 3px 3px 0 #1a1a1a;
+    margin-bottom: 14px;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+  }
+
+  .final-wish p {
+    color: var(--cream);
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.8;
+  }
+
+  .big-heart-btn {
+    display: inline-block;
+    margin-top: 22px;
+    background: var(--electric-yellow);
+    border: 4px solid #1a1a1a;
+    border-radius: 50px;
+    padding: 14px 36px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 6px 6px 0 #1a1a1a;
+    transition: transform 0.1s, box-shadow 0.1s;
+    color: #1a1a1a;
+    animation: heartBeat 1.2s ease-in-out infinite;
+  }
+
+  @keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.08); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.05); }
+    70% { transform: scale(1); }
+  }
+
+  .big-heart-btn:hover {
+    transform: translate(-3px, -3px) scale(1.05);
+    box-shadow: 10px 10px 0 #1a1a1a;
+    animation: none;
+  }
+
+  .big-heart-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #1a1a1a;
+  }
+
+  /* CONFETTI burst on click */
+  .confetti-piece {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 9999;
+    animation: confettiFall 1.2s ease-out forwards;
+  }
+
+  @keyframes confettiFall {
+    0% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+    100% { opacity: 0; transform: translateY(200px) rotate(720deg) scale(0.3); }
+  }
+
+  /* FOOTER */
+  footer {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    padding: 20px 0 30px;
+    font-weight: 600;
+  }
+
+  .disclaimer {
+    background: rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 12px 18px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 10px;
+    font-weight: 600;
+    border: 2px dashed rgba(255,255,255,0.3);
+  }
+
+  /* Responsive */
+  @media (max-width: 500px) {
+    .quiz-options { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating hearts background -->
+<div class="heart-rain" id="heartRain"></div>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="main-header">
+    <div class="header-label">🚨 URGENT MESSAGE 🚨</div>
+    <h1 class="main-title">Happy Valentine's Day!</h1>
+    <p class="title-sub">...from someone who definitely didn't Google "how to be romantic"</p>
+  </div>
+
+  <!-- INTRO CARD -->
+  <div class="card">
+    <div class="card-title">📬 A Letter To You</div>
+    <p class="card-body">
+      Dear <span class="highlight">You, Yes You</span>,<br><br>
+      On this sacred day of overpriced chocolate and mysteriously red everything,
+      I wanted to reach out and let you know:
+      you are <span class="highlight">absolutely, completely, 100%</span> the reason
+      I have trust issues — in the <span class="green">best possible way</span>. 🌹<br><br>
+      You've stolen my heart. Please return it. I need it to survive.
+    </p>
+  </div>
+
+  <!-- ROAST SECTION -->
+  <div class="roast-section">
+    <h2>💅 Why You're Annoyingly Great</h2>
+    <ul class="roast-list" id="roastList">
+      <li class="roast-item"><span class="emoji">😤</span><span>You're so kind it's honestly a little suspicious. What are you hiding?</span></li>
+      <li class="roast-item"><span class="emoji">🧠</span><span>You're smart enough to know exactly when I'm being dramatic. Rude, honestly.</span></li>
+      <li class="roast-item"><span class="emoji">😂</span><span>Your laugh is so contagious it should require a health warning label.</span></li>
+      <li class="roast-item"><span class="emoji">✨</span><span>You somehow make being yourself look effortless. Please share your secrets.</span></li>
+      <li class="roast-item"><span class="emoji">🍕</span><span>You have excellent taste. In food, at least. Your choice in people is... questionable. (You're reading this.)</span></li>
+    </ul>
+  </div>
+
+  <!-- QUIZ SECTION -->
+  <div class="quiz-section">
+    <h2>🧪 A Very Official Quiz</h2>
+    <p class="quiz-subtitle">We need to verify your Valentine credentials. This is legally binding.</p>
+    <div class="quiz-question" id="quizQuestion">Loading your fate...</div>
+    <div class="quiz-options" id="quizOptions"></div>
+    <div class="quiz-result" id="quizResult"></div>
+  </div>
+
+  <!-- CONFESSION GENERATOR -->
+  <div class="confession-section">
+    <h2>💌 Random Love Confession Generator</h2>
+    <div class="confess-display" id="confessDisplay" onclick="generateConfession()">
+      Click the button to reveal your personalized love confession! 💘
+    </div>
+    <button class="confess-btn" onclick="generateConfession()">🎲 Generate Another One!</button>
+  </div>
+
+  <!-- FINAL WISH -->
+  <div class="final-wish">
+    <h2>❤️ But Seriously Though...</h2>
+    <p>
+      All jokes aside — you genuinely deserve a Valentine's Day
+      that's as wonderful, warm, and completely over-the-top
+      as you are. 🌟<br><br>
+      May your day be filled with joy, good food,
+      zero awkward small talk, and all the love in the world.
+      You deserve every single bit of it.<br><br>
+      💘 <strong>Happy Valentine's Day!</strong> 💘
+    </p>
+    <button class="big-heart-btn" onclick="launchConfetti(this)">
+      Send Love Back! 💝
+    </button>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="disclaimer">
+    ⚠️ DISCLAIMER: No hearts were broken in the making of this website.
+    Side effects include: uncontrollable smiling, the urge to hug someone,
+    and a strange craving for chocolate. Consult your feelings before proceeding.
+  </div>
+  <footer>Made with 💗, bad puns, and a dangerous amount of pink.</footer>
+
+</div>
+
+<script>
+  // ---- FLOATING HEARTS ----
+  const heartRain = document.getElementById('heartRain');
+  const heartEmojis = ['❤️','💕','💘','💝','💖','💗','💓','🌹','💞','🫶'];
+  for (let i = 0; i < 25; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'falling-heart';
+    heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (0.8 + Math.random() * 1.8) + 'rem';
+    const dur = 6 + Math.random() * 10;
+    heart.style.animationDuration = dur + 's';
+    heart.style.animationDelay = (Math.random() * 8) + 's';
+    heartRain.appendChild(heart);
+  }
+
+  // ---- QUIZ ----
+  const quizData = [
+    {
+      q: "🤔 What is the most romantic thing you can do on Valentine's Day?",
+      options: ["Send a heartfelt message 💌", "Buy overpriced roses 🌹", "Pretend to forget it 🙃", "Eat all the candy yourself 🍬"],
+      correct: 3,
+      responses: [
+        "Correct! You're a natural. Have you considered being a romantic advisor? 💐",
+        "Classic move. The florist industry thanks you for your service. 💸",
+        "Bold strategy. Very bold. Did it work? (It never works.) 😬",
+        "Honestly? Most honest answer. Respect. 🍫"
+      ]
+    },
+    {
+      q: "💐 You receive a bouquet of flowers. What do you do?",
+      options: ["Cherish them forever 🥹", "Post it immediately 📸", "Quietly check if they're fake 🔍", "Sneeze because allergies 🤧"],
+      correct: 2,
+      responses: [
+        "Sweet! You're made of sunshine and poor decision-making. We love it. ☀️",
+        "0.3 seconds. That's our estimate. We see you. 📱",
+        "THE CORRECT ANSWER. Never trust anything that perfect. 🕵️",
+        "Nature said no to romance. Nature wins again. 🌿"
+      ]
+    },
+    {
+      q: "🍷 The perfect Valentine's dinner is...",
+      options: ["Fancy restaurant 🕯️", "Home-cooked meal 👨‍🍳", "Fast food, no judgment 🍔", "Cereal because you're tired 🥣"],
+      correct: 3,
+      responses: [
+        "Elegant! You planned 6 weeks ahead, didn't you? Type A. We see you. 📅",
+        "So romantic! (How many smoke alarms went off? Be honest.) 🔥",
+        "Iconic. Nothing says love like splitting a large fries at 10pm. 💯",
+        "WINNER. The most romantic answer. Love doesn't need a dress code. 🏆"
+      ]
+    },
+    {
+      q: "💬 Someone says 'I love you' first. You say:",
+      options: ["I love you too! ❤️", "That's so sweet... 🥺", "Thank you 😬", "...can you repeat that?"],
+      correct: 0,
+      responses: [
+        "FLAWLESS. Emotionally available AND timely. You're a rare specimen. 🦄",
+        "The ellipsis says it all. There was a 3-second pause, wasn't there? 😅",
+        "You said THANK YOU. THANK YOU. We need to talk. 👀",
+        "One time is never enough with you, huh? Playing it cool. Very cool. 😎"
+      ]
+    }
+  ];
+
+  let currentQ = Math.floor(Math.random() * quizData.length);
+
+  function loadQuestion() {
+    const data = quizData[currentQ];
+    document.getElementById('quizQuestion').textContent = data.q;
+    const optionsDiv = document.getElementById('quizOptions');
+    optionsDiv.innerHTML = '';
+    document.getElementById('quizResult').style.display = 'none';
+    data.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-btn';
+      btn.textContent = opt;
+      btn.onclick = () => answerQuiz(i);
+      optionsDiv.appendChild(btn);
+    });
+  }
+
+  function answerQuiz(index) {
+    const data = quizData[currentQ];
+    const result = document.getElementById('quizResult');
+    result.textContent = data.responses[index];
+    result.style.display = 'block';
+    // Load next question after delay
+    setTimeout(() => {
+      currentQ = (currentQ + 1) % quizData.length;
+      loadQuestion();
+    }, 2800);
+  }
+
+  loadQuestion();
+
+  // ---- CONFESSION GENERATOR ----
+  const confessionStarters = [
+    "You make me want to", "The moment I saw you, I knew", "I'd fight a bear for you, but also",
+    "Scientists can't explain why", "In a parallel universe,", "My heart does a little backflip when",
+    "I Googled 'how to tell someone' and ended up here —", "Without you,", "Studies show that"
+  ];
+  const confessionMidlines = [
+    "my heart beats faster than my WiFi", "you're the reason I check my phone every 5 minutes",
+    "I became 47% more charming", "the void looks slightly less vague",
+    "my plants started thriving (correlation? maybe)", "I keep accidentally smiling at strangers",
+    "something in my brain says 'you're doing great'", "I believe in good things again",
+    "even Mondays feel survivable"
+  ];
+  const confessionEnders = [
+    "...and that's your fault. Entirely your fault. ❤️",
+    "...so yeah. Happy Valentine's Day, I guess. 💘",
+    "...which is deeply embarrassing. But here we are. 💝",
+    "...don't let it go to your head. (Let it go to your heart.) 💗",
+    "...I'm not crying, you're crying. 🥹",
+    "...I'm filing a complaint. With my feelings. To you. 💌",
+    "...anyway. You're great. Please continue existing. 🌹"
+  ];
+
+  function generateConfession() {
+    const s = confessionStarters[Math.floor(Math.random() * confessionStarters.length)];
+    const m = confessionMidlines[Math.floor(Math.random() * confessionMidlines.length)];
+    const e = confessionEnders[Math.floor(Math.random() * confessionEnders.length)];
+    document.getElementById('confessDisplay').textContent = `"${s} ${m} ${e}"`;
+  }
+
+  generateConfession();
+
+  // ---- CONFETTI ----
+  const confettiColors = ['#FF2D78','#FFE600','#FF6B35','#39FF14','#00C8FF','#fff','#C0003C'];
+
+  function launchConfetti(btn) {
+    const rect = btn.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+
+    for (let i = 0; i < 60; i++) {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      const color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+      piece.style.background = color;
+      piece.style.left = cx + 'px';
+      piece.style.top = cy + 'px';
+      const tx = (Math.random() - 0.5) * 400;
+      const ty = (Math.random() - 0.5) * 300 - 100;
+      piece.style.setProperty('--tx', tx + 'px');
+      piece.style.setProperty('--ty', ty + 'px');
+      piece.style.width = (6 + Math.random() * 10) + 'px';
+      piece.style.height = (6 + Math.random() * 10) + 'px';
+      piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      piece.style.transform = `translate(${tx}px, ${ty}px)`;
+      piece.style.animationDuration = (0.8 + Math.random() * 0.8) + 's';
+      document.body.appendChild(piece);
+      setTimeout(() => piece.remove(), 1600);
+    }
+
+    btn.textContent = '💞 Love Sent! 💞';
+    setTimeout(() => btn.textContent = 'Send Love Back! 💝', 2000);
+  }
+</script>
+</body>
+</html>
