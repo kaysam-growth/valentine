@@ -412,20 +412,91 @@
     line-height: 1.8;
   }
 
-  .big-heart-btn {
-    display: inline-block;
-    margin-top: 22px;
-    background: var(--electric-yellow);
+  /* POPUP OVERLAY */
+  .popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    z-index: 9000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .popup-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .popup-box {
+    background: var(--cream);
+    border: 5px solid #1a1a1a;
+    border-radius: 24px;
+    box-shadow: 10px 10px 0 #1a1a1a;
+    padding: 40px 36px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
+    position: relative;
+  }
+
+  @keyframes popIn {
+    0% { transform: scale(0.3) rotate(-8deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+
+  .popup-emoji {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 10px;
+    animation: wiggle 1s ease-in-out infinite;
+  }
+
+  .popup-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
+    color: var(--hot-pink);
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+    margin-bottom: 8px;
+  }
+
+  .popup-sub {
+    font-size: 0.95rem;
+    color: #666;
+    font-weight: 600;
+    margin-bottom: 28px;
+  }
+
+  .popup-btn-row {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-yes {
+    background: var(--hot-pink);
+    color: white;
     border: 4px solid #1a1a1a;
-    border-radius: 50px;
+    border-radius: 14px;
     padding: 14px 36px;
     font-family: 'Fredoka One', cursive;
     font-size: 1.4rem;
     cursor: pointer;
-    box-shadow: 6px 6px 0 #1a1a1a;
+    box-shadow: 5px 5px 0 #1a1a1a;
     transition: transform 0.1s, box-shadow 0.1s;
-    color: #1a1a1a;
     animation: heartBeat 1.2s ease-in-out infinite;
+  }
+
+  .btn-yes:hover {
+    transform: translate(-2px,-2px) scale(1.05);
+    box-shadow: 8px 8px 0 #1a1a1a;
+    animation: none;
   }
 
   @keyframes heartBeat {
@@ -433,18 +504,80 @@
     14% { transform: scale(1.08); }
     28% { transform: scale(1); }
     42% { transform: scale(1.05); }
-    70% { transform: scale(1); }
   }
 
-  .big-heart-btn:hover {
-    transform: translate(-3px, -3px) scale(1.05);
-    box-shadow: 10px 10px 0 #1a1a1a;
+  .btn-no {
+    background: #ddd;
+    color: #555;
+    border: 4px solid #1a1a1a;
+    border-radius: 14px;
+    padding: 14px 22px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 5px 5px 0 #1a1a1a;
+    position: fixed; /* will be repositioned by JS */
+    transition: background 0.15s;
+    z-index: 9999;
+    display: none;
+  }
+
+  .btn-no:hover { background: #ccc; }
+
+  /* JOKE SCREEN inside popup */
+  .popup-joke {
+    display: none;
+  }
+
+  .joke-emoji {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 10px;
+    animation: spin 0.6s ease-out;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(-30deg) scale(0.5); }
+    to { transform: rotate(0deg) scale(1); }
+  }
+
+  .joke-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
+    color: var(--deep-red);
+    margin-bottom: 10px;
+  }
+
+  .joke-body {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #333;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #25D366;
+    color: white;
+    border: 4px solid #1a1a1a;
+    border-radius: 14px;
+    padding: 14px 26px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 5px 5px 0 #1a1a1a;
+    text-decoration: none;
+    transition: transform 0.1s, box-shadow 0.1s;
+    animation: heartBeat 1.4s ease-in-out infinite;
+  }
+
+  .whatsapp-btn:hover {
+    transform: translate(-2px,-2px);
+    box-shadow: 8px 8px 0 #1a1a1a;
     animation: none;
-  }
-
-  .big-heart-btn:active {
-    transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0 #1a1a1a;
   }
 
   /* CONFETTI burst on click */
@@ -454,7 +587,7 @@
     height: 10px;
     border-radius: 2px;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 99999;
     animation: confettiFall 1.2s ease-out forwards;
   }
 
@@ -557,9 +690,6 @@
       You deserve every single bit of it.<br><br>
       💘 <strong>Happy Valentine's Day!</strong> 💘
     </p>
-    <button class="big-heart-btn" onclick="launchConfetti(this)">
-      Send Love Back! 💝
-    </button>
   </div>
 
   <!-- FOOTER -->
@@ -568,9 +698,51 @@
     Side effects include: uncontrollable smiling, the urge to hug someone,
     and a strange craving for chocolate. Consult your feelings before proceeding.
   </div>
-  <footer>Made with 💗, bad puns, and a dangerous amount of pink.</footer>
+  <footer>Made with 💗, bad puns, and a dangerous amount of pink.<br>
+    <strong style="color:var(--electric-yellow); text-shadow: 1px 1px 0 #1a1a1a;">Created by: KAYSAM GROWTH</strong>
+  </footer>
+
+  <!-- SCROLL SENTINEL -->
+  <div id="scrollSentinel" style="height:1px;"></div>
 
 </div>
+
+<!-- VALENTINE POPUP -->
+<div class="popup-overlay" id="valentinePopup">
+  <div class="popup-box" id="popupBox">
+
+    <!-- Question screen -->
+    <div id="popupQuestion">
+      <span class="popup-emoji">💘</span>
+      <div class="popup-title">Will u be my Valentine? 🥺</div>
+      <p class="popup-sub">Choose wisely. The universe is watching. 👀</p>
+      <div class="popup-btn-row">
+        <button class="btn-yes" onclick="sayYes()">YES 💖</button>
+        <button class="btn-yes" style="background:var(--electric-yellow);color:#1a1a1a;font-size:1rem;padding:14px 18px;animation:none;" id="btnNoProxy" onclick="startRunning()">I'm still thinking about it 🤔</button>
+      </div>
+    </div>
+
+    <!-- Joke screen (shown after YES) -->
+    <div class="popup-joke" id="popupJoke">
+      <span class="joke-emoji">😂</span>
+      <div class="joke-title">Haha, I KNEW IT!! 🎉</div>
+      <p class="joke-body">
+        Let's be real — you were ALWAYS going to say yes!<br>
+        That little "I'm thinking about it" act? Adorable. Truly.<br>
+        But deep down your heart had already decided. ❤️<br><br>
+        Now go share some love — it's what Valentines do! 💌
+      </p>
+      <a class="whatsapp-btn" id="whatsappLink" href="#" target="_blank">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Send Love on WhatsApp 💚
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- Runaway NO button (lives outside popup so it can go anywhere) -->
+<button class="btn-no" id="btnNo" onmouseenter="runAway()" ontouchstart="runAway()">I'm still thinking about it 🤔</button>
 
 <script>
   // ---- FLOATING HEARTS ----
@@ -658,7 +830,6 @@
     const result = document.getElementById('quizResult');
     result.textContent = data.responses[index];
     result.style.display = 'block';
-    // Load next question after delay
     setTimeout(() => {
       currentQ = (currentQ + 1) % quizData.length;
       loadQuestion();
@@ -699,36 +870,122 @@
 
   generateConfession();
 
+  // ---- SCROLL-TRIGGERED POPUP ----
+  let popupShown = false;
+  const sentinel = document.getElementById('scrollSentinel');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !popupShown) {
+        popupShown = true;
+        setTimeout(() => {
+          openPopup();
+        }, 600);
+      }
+    });
+  }, { threshold: 1.0 });
+
+  observer.observe(sentinel);
+
+  function openPopup() {
+    const popup = document.getElementById('valentinePopup');
+    popup.classList.add('active');
+    // Show the proxy "no" button inside popup, hide the flying one
+    document.getElementById('btnNoProxy').style.display = 'inline-flex';
+    document.getElementById('btnNo').style.display = 'none';
+  }
+
+  // ---- RUNAWAY "NO" BUTTON ----
+  let runInterval = null;
+  let runCount = 0;
+  const taunts = [
+    "Nope! Come back! 😂", "Too slow!! 😜", "Nice try!! 💨",
+    "Hehe, not today! 🏃", "Catch me if u can! 🤣", "Almost!! 😝"
+  ];
+
+  function startRunning() {
+    // Hide the proxy button inside popup, show the flying one
+    document.getElementById('btnNoProxy').style.display = 'none';
+    const btnNo = document.getElementById('btnNo');
+    btnNo.style.display = 'block';
+
+    // Start it roughly where the proxy was
+    const proxy = document.getElementById('btnNoProxy');
+    const popupBox = document.getElementById('popupBox');
+    const rect = popupBox.getBoundingClientRect();
+    btnNo.style.left = (rect.left + rect.width / 2 - 100) + 'px';
+    btnNo.style.top = (rect.top + rect.height / 2) + 'px';
+
+    teleportAway();
+  }
+
+  function runAway() {
+    teleportAway();
+  }
+
+  function teleportAway() {
+    const btnNo = document.getElementById('btnNo');
+    const margin = 20;
+    const bw = btnNo.offsetWidth || 180;
+    const bh = btnNo.offsetHeight || 50;
+    const maxX = window.innerWidth - bw - margin;
+    const maxY = window.innerHeight - bh - margin;
+    const newX = margin + Math.random() * maxX;
+    const newY = margin + Math.random() * maxY;
+    btnNo.style.left = newX + 'px';
+    btnNo.style.top = newY + 'px';
+    runCount++;
+    // Update button text with taunts
+    if (runCount <= taunts.length) {
+      btnNo.textContent = taunts[runCount - 1];
+    } else {
+      btnNo.textContent = "Still can't catch me! 😂";
+    }
+  }
+
+  // ---- SAY YES ----
+  function sayYes() {
+    // Hide the runaway button
+    document.getElementById('btnNo').style.display = 'none';
+
+    // Launch confetti celebration
+    launchConfetti();
+
+    // Swap popup content
+    document.getElementById('popupQuestion').style.display = 'none';
+    document.getElementById('popupJoke').style.display = 'block';
+
+    // Set WhatsApp link
+    const phone = '233554222103'; // international format, Ghana
+    const message = encodeURIComponent("Happy Valentine's Day from KAYSAM GROWTH. Don't forget to Share some LOVE this festive season. Incase you need a custom website for your business, we are here for you ; Prices ranging from GHS 120 only for first 60 customers.");
+    document.getElementById('whatsappLink').href = `https://wa.me/${phone}?text=${message}`;
+  }
+
   // ---- CONFETTI ----
   const confettiColors = ['#FF2D78','#FFE600','#FF6B35','#39FF14','#00C8FF','#fff','#C0003C'];
 
-  function launchConfetti(btn) {
-    const rect = btn.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
+  function launchConfetti(fromEl) {
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
 
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 80; i++) {
       const piece = document.createElement('div');
       piece.className = 'confetti-piece';
       const color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
       piece.style.background = color;
       piece.style.left = cx + 'px';
       piece.style.top = cy + 'px';
-      const tx = (Math.random() - 0.5) * 400;
-      const ty = (Math.random() - 0.5) * 300 - 100;
-      piece.style.setProperty('--tx', tx + 'px');
-      piece.style.setProperty('--ty', ty + 'px');
-      piece.style.width = (6 + Math.random() * 10) + 'px';
-      piece.style.height = (6 + Math.random() * 10) + 'px';
+      const tx = (Math.random() - 0.5) * 500;
+      const ty = (Math.random() - 0.7) * 400;
+      piece.style.width = (6 + Math.random() * 12) + 'px';
+      piece.style.height = (6 + Math.random() * 12) + 'px';
       piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
       piece.style.transform = `translate(${tx}px, ${ty}px)`;
-      piece.style.animationDuration = (0.8 + Math.random() * 0.8) + 's';
+      piece.style.animationDuration = (0.9 + Math.random() * 0.9) + 's';
+      piece.style.animationDelay = (Math.random() * 0.3) + 's';
       document.body.appendChild(piece);
-      setTimeout(() => piece.remove(), 1600);
+      setTimeout(() => piece.remove(), 2000);
     }
-
-    btn.textContent = '💞 Love Sent! 💞';
-    setTimeout(() => btn.textContent = 'Send Love Back! 💝', 2000);
   }
 </script>
 </body>
